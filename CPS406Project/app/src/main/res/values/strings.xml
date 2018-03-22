@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">CPS406 Project</string>
     <string name="title_activity_maps">Map</string>
+    
+    <string-array name="my_locations">
+    
+    </string-array>
+
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
