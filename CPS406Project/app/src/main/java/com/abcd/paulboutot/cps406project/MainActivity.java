@@ -23,7 +23,7 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     public final int LOCATION_REQUEST = 500;
-    private GoogleMap mMap;
+    private MapFragment mapFragment;
 
     ListView search_location;
     ArrayAdapter<String> adapter;
@@ -50,6 +50,30 @@ public class MainActivity extends AppCompatActivity {
         aLayout.addDrawerListener(toggle);
         toggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    /**
+     * Gets the map fragment.
+     * @return
+     */
+    public MapFragment getMapFragment() {
+        return mapFragment;
+    }
+
+    /**
+     * sets the map fragment.
+     * @param mapFragment
+     */
+    public void setMapFragment(MapFragment mapFragment) {
+        this.mapFragment = mapFragment;
+    }
+
+    /**
+     * Gets the map that is being shown to the user.
+     * @return the map that is shown in this activity.
+     */
+    public GoogleMap getMap() {
+        return getMapFragment().getMap();
     }
 
     @Override
@@ -89,8 +113,8 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == LOCATION_REQUEST) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                if (mMap != null) {
-                    mMap.setMyLocationEnabled(true);
+                if (getMap() != null) {
+                    getMap().setMyLocationEnabled(true);
                 }
                 else {
                     throw new NullPointerException("setMap was never called properly in MapFragment.java" +
@@ -100,7 +124,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void setMap(GoogleMap map) {
-        mMap = map;
-    }
 }
